@@ -1,78 +1,85 @@
 import "./App.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+// import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
 
-// Nuevas importaciones
-import { Button, Layout, theme } from "antd";
-import { Logo } from "./components/Logo.jsx";
-import MenuList from "./components/MenuList.jsx";
-import { useState } from "react";
-import ToggleThemeButton from "./components/ToggleThemeButton.jsx";
-import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
-import { counterSlice } from "./store/slices/counter/counterSlice.js";
-import { Nata } from "./components/nata/Nata.jsx";
+  BrowserRouter,
+  createBrowserRouter,
+  Route,
+  Router,
+  RouterProvider,
+  Routes,
 
-const { Header, Sider } = Layout;
+} from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+// Nuevas pages
+import {Login} from './pages/login'
+import SideBarMenuPage from "./pages/sideBarMenuPage";
+import ProtectedRoute from "./components/protectedRoute/ProtectedRoute.jsx";
+import HomePage from "./pages/homePage/index.jsx";
+import HumedadPage from "./pages/humedadPage/index.jsx";
+import TemperaturaPage from "./pages/temperaturaPage/index.jsx";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <div>Hello world Home Page!</div>,
-  },
-  {
-    path: "/nata",
-    element: <Nata />,
-  },
-  {
-    path: "/pagina2",
-    element: <div>Hello world! Pagina 2</div>,
-  },
-  {
-    path: "/pagina3",
-    element: <div>Hello world! Pagina 3</div>,
-  },
-]);
+
+// const router = createBrowserRouter([
+//   {
+//     path: "/",
+//     element: <div>Hello world Home Page!</div>,
+//   },
+//   {
+//     path: "/nata",
+//     element: <Nata />,
+//   },
+//   {
+//     path: "/pagina2",
+//     element: <div>Hello world! Pagina 2</div>,
+//   },
+//   {
+//     path: "/pagina3",
+//     element: <div>Hello world! Pagina 3</div>,
+//   },
+// ]);
 function App() {
-  const [darkTheme, setDarkTheme] = useState(true);
+    //-------- redux
 
-  const [collapsed, setCollapsed] = useState(false);
+    // const { counterJaime } = useSelector( state => state.counter )
+    // const { authorizedStateRedux } = useSelector( state => state.authorized )
+    // const [stateReduxAut , setStateReduxAut] = useState(authorizedStateRedux)
 
-  const toggleTheme = () => {
-    setDarkTheme(!darkTheme);
-  };
+    // useEffect(()=>{
 
-  const {
-    token: { colorBgContainer },
-  } = theme.useToken();
+    //     setStateReduxAut(authorizedStateRedux)
+
+    // } , [authorizedStateRedux])
+
+  let stateReduxAut = true;
 
   return (
-    <div className="container__app">
-      <Layout>
-        <Sider
-          collapsed={collapsed}
-          collapsible
-          trigger={null}
-          className="sidebar"
-          theme={darkTheme ? "dark" : "light"}
-        >
-          <Logo />
-          <MenuList darkTheme={darkTheme} />
-          <ToggleThemeButton darkTheme={darkTheme} toggleTheme={toggleTheme} />
-        </Sider>
+    <>
+    <BrowserRouter>
 
-        <Header style={{ padding: 0, background: colorBgContainer }}>
-          {/* <Button type="text" icon={collapsed ? <p> Si </p> : <p> No </p>} /> */}
-          <Button
-            type="text"
-            className="toggle"
-            onClick={() => setCollapsed(!collapsed)}
-            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-          />
-        </Header>
+        {stateReduxAut ? <SideBarMenuPage  /> : null}
 
-        <RouterProvider router={router} />
-        {/* {counterSlice} */}
-      </Layout>
-    </div>
+        <Routes>
+                {
+                    // !true ?  <Route exact path="/" element={<Login  />} /> : null
+                    !stateReduxAut ?  <Route exact path="/" element={<Login  />} /> : null
+                    
+                }
+
+                <Route element={<ProtectedRoute canActivate={stateReduxAut} />} >
+                        <Route exact path="/" element={<HomePage />} />
+                        <Route exact path="/humedad" element={<HumedadPage />} />
+                        <Route exact path="/temperatura" element={<TemperaturaPage />} />
+                </Route>
+        </Routes>
+
+    
+    </BrowserRouter>
+      {/* <RouterProvider router={router} /> */}
+
+
+    </>
   );
 }
 
