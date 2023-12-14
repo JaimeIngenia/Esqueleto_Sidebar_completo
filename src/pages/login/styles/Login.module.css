@@ -86,8 +86,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* border: dotted rgba(5, 5, 104, 0.364) 4px; */
+    border: dotted rgba(5, 5, 104, 0.364) 4px;
     margin-top: 5vh;
     margin-bottom: 5vh;
     height: 65vh;
+    /* width: 100%; */
 }

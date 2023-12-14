@@ -48,7 +48,7 @@ function App() {
 
     // } , [authorizedStateRedux])
 
-  let stateReduxAut = true;
+  let stateReduxAut = false;
 
   return (
     <>
