@@ -13,6 +13,7 @@ import axios from 'axios';
 import md5 from 'md5';
 
 
+
 const {Item} = Form;
 const {Password} = Input;
 
@@ -72,16 +73,21 @@ export const Login = (  ) => {
     /***********     Controlador    ****** */
     /************************************* */
 
-
-    const baseUrl = "/api/usuario";
+    const baseUrl = "https://localhost:7240/api/usuario"
 
     const cookies = new Cookies();
 
     const iniciarSesion = async () => {
 
+        axios.defaults.withCredentials = true;
+
         setIsModalOpen(false);
 
-        await axios.get(`${baseUrl}/${form.correo}/${md5(form.password)}`)
+        await axios.get(`${baseUrl}/${form.correo}/${md5(form.password)}`, {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
         
         .then(response=>{
         
@@ -108,14 +114,10 @@ export const Login = (  ) => {
                 cookies.set('apellidos', respuesta.apellidos , { path: '/' });
                 cookies.set('contrasena', respuesta.contrasena , { path: '/' });
                 cookies.set('correo', respuesta.correo , { path: '/' });
-                //alert("Bienvenido: " + respuesta.nombres + " " + respuesta.apellidos);
-                //setAutrizado(true)
-                // dispatch( changeAuthorized() )
+                alert("Bienvenido: " + respuesta.nombres + " " + respuesta.apellidos);
                 console.log("Jaime este es el authorizedStateRedux: ");
-                // console.log(authorizedStateRedux);
             }else{
                 alert('El usuario o la contraseña no son correctos')
-                //setAutrizado(false)
             }
         })
         .catch(error=>{
@@ -148,6 +150,7 @@ export const Login = (  ) => {
 
     //-------------------------modal
     const navigate = useNavigate();
+
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const showModal = () => {

@@ -1,14 +1,8 @@
 import "./App.css";
-// import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import {
-
   BrowserRouter,
-  createBrowserRouter,
   Route,
-  Router,
-  RouterProvider,
   Routes,
-
 } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
@@ -19,7 +13,9 @@ import ProtectedRoute from "./components/protectedRoute/ProtectedRoute.jsx";
 import HomePage from "./pages/homePage/index.jsx";
 import HumedadPage from "./pages/humedadPage/index.jsx";
 import TemperaturaPage from "./pages/temperaturaPage/index.jsx";
+import { Layout } from "antd";
 
+const { Header, Sider } = Layout;
 
 // const router = createBrowserRouter([
 //   {
@@ -56,27 +52,26 @@ function App() {
 
   return (
     <>
-    <BrowserRouter>
+      <BrowserRouter>
+        <div className='container__app'>
+          {stateReduxAut && <Layout />}
+          
+          {stateReduxAut && <SideBarMenuPage />}
 
-        {stateReduxAut ? <SideBarMenuPage  /> : null}
+          <Routes>
+            {!stateReduxAut && <Route exact path="/" element={<Login />} />}
 
-        <Routes>
-                {
-                    // !true ?  <Route exact path="/" element={<Login  />} /> : null
-                    !stateReduxAut ?  <Route exact path="/" element={<Login  />} /> : null
-                    
-                }
+            <Route element={<ProtectedRoute canActivate={stateReduxAut} />}>
+              <Route exact path="/" element={<HomePage />} />
+              <Route exact path="/humedad" element={<HumedadPage />} />
+              <Route exact path="/temperatura" element={<TemperaturaPage />} />
+            </Route>
+          </Routes>
 
-                <Route element={<ProtectedRoute canActivate={stateReduxAut} />} >
-                        <Route exact path="/" element={<HomePage />} />
-                        <Route exact path="/humedad" element={<HumedadPage />} />
-                        <Route exact path="/temperatura" element={<TemperaturaPage />} />
-                </Route>
-        </Routes>
+          {stateReduxAut && <Layout />}
+        </div>
+      </BrowserRouter>
 
-    
-    </BrowserRouter>
-      {/* <RouterProvider router={router} /> */}
 
 
     </>
