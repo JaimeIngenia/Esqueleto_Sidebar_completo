@@ -16,7 +16,7 @@ const { Header, Sider } = Layout;
 const SideBarMenuPage = () => {
 
   const darkThemeColors = {
-    background: '#008000', // verde oscuro para dark
+    background: '#11342F', // verde oscuro para dark
     text: '#ffffff', // blanco para el texto en dark
   };
   
@@ -46,6 +46,7 @@ const SideBarMenuPage = () => {
         style={{
           background: themeColors.background,
           color: themeColors.text,
+          
         }}
       >
         <Logo />
@@ -53,7 +54,7 @@ const SideBarMenuPage = () => {
         <ToggleThemeButton darkTheme={darkTheme} toggleTheme={toggleTheme} />
       </Sider>
 
-      <Header style={{ padding: 0, background: themeColors.background, color: themeColors.text }}>
+      <Header style={{ padding: 0, background: themeColors.background, color: themeColors.text , height: '100vh'}}>
         <Button
           type="text"
           className="toggle"

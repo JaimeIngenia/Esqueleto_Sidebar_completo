@@ -12,8 +12,10 @@ import SideBarMenuPage from "./pages/sideBarMenuPage";
 import ProtectedRoute from "./components/protectedRoute/ProtectedRoute.jsx";
 import HomePage from "./pages/homePage/index.jsx";
 import HumedadPage from "./pages/humedadPage/index.jsx";
-import TemperaturaPage from "./pages/temperaturaPage/index.jsx";
+import TemperaturaHumedadPage from "./pages/temperaturaHumedadPage";
 import { Layout } from "antd";
+import EstadisticasPage from "./pages/estadisticasPage/index.jsx";
+import "bootstrap/dist/css/bootstrap.min.css"
 
 const { Header, Sider } = Layout;
 
@@ -48,7 +50,7 @@ function App() {
 
     // } , [authorizedStateRedux])
 
-  let stateReduxAut = false;
+  let stateReduxAut = true;
 
   return (
     <>
@@ -64,7 +66,9 @@ function App() {
             <Route element={<ProtectedRoute canActivate={stateReduxAut} />}>
               <Route exact path="/" element={<HomePage />} />
               <Route exact path="/humedad" element={<HumedadPage />} />
-              <Route exact path="/temperatura" element={<TemperaturaPage />} />
+              <Route exact path="/temperaturaHumedad" element={<TemperaturaHumedadPage />} />
+              <Route exact path="/estadisticas" element={<EstadisticasPage />} />
+
             </Route>
           </Routes>
 

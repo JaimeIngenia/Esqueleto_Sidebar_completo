@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Kranky&display=swap');
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.contenedor__home__page{
+    display: flex;
+    flex-direction: column;
+    /* border: solid red 3px; */
+    width: 100%;
+    background: #11342F;
+    height: 100vh;
+}
+
+.planta__superior{
+    /* border: solid rgb(204, 255, 0) 3px; */
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    height: 40vh;
+}
+    .planta__superior img{
+        width: 30%;
+    }
+
+    .texto__planta{
+        /* border: solid red 3px; */
+        width: 100%;
+        /* height: 300px; */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        /* align-items: center; */
+        color: white;
+        font-family: 'Kranky', serif;
+        padding-left: 5%;
+    }
+        .texto__planta__parrafo{
+            display: flex;
+            flex-direction: row;
+        }
+
+.planta__media{
+    /* border: solid rgb(0, 102, 255) 3px; */
+    width: 100%;
+    font-family: 'Kranky', serif;
+    color: white;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 5%;
+    height: 40vh;
+}
+
+.planta__baja{
+    /* border: solid red 3px; */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    height: 20vh;
+}
+    .planta__baja img{
+        width: 80%;
+    }
