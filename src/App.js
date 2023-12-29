@@ -16,6 +16,8 @@ import TemperaturaHumedadPage from "./pages/temperaturaHumedadPage";
 import { Layout } from "antd";
 import EstadisticasPage from "./pages/estadisticasPage/index.jsx";
 import "bootstrap/dist/css/bootstrap.min.css"
+// import 'antd/dist/reset.css';
+
 
 const { Header, Sider } = Layout;
 
