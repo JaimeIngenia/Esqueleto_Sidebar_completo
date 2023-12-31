@@ -1,11 +1,13 @@
 import React from 'react';
+import styles from './styles/HumedadPage.module.css'
 
 const HumedadPage = () => {
     return (
-        <div>
-            <h1>Hola soy humedad page</h1>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quam dolorum maiores doloremque animi consectetur maxime, in nam, libero sed minima ab placeat laudantium. Harum modi ex debitis! Error, quaerat.
-        </div>
+        <>
+            <div className={styles.containner__humedad}>
+                <h1>Soy Humedad 420</h1>
+            </div>
+        </>
     );
 }
 

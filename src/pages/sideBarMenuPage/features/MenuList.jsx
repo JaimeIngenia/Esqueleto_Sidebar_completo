@@ -40,18 +40,29 @@ const MenuList = ({ darkTheme }) => {
       </Menu.Item>
 
       <Menu.SubMenu key="Sensores" icon={<BarsOutlined />} title="Sensores">
+
         <Menu.Item key="temperatura&humedad">
           <Link to={"/temperaturaHumedad"}>
             Temp y Humedad
           </Link>
         </Menu.Item>
-        <Menu.Item key="humedad">Humedad</Menu.Item>
-        <Menu.Item key="riegos">Riegos</Menu.Item>
+
+        <Menu.Item key="humedad">
+          <Link to={"/humedad"}>
+            Humedad
+          </Link>
+        </Menu.Item>
+
+        <Menu.Item key="riego">
+          <Link to={"/riego"}>
+            Riegos
+          </Link>
+        </Menu.Item>
 
       </Menu.SubMenu>
 
       <Menu.Item key="/usuario" icon={<UserOutlined />}>
-        <Link to={"/usuario"}>
+        <Link to={"/user"}>
           Usuario
         </Link>
       </Menu.Item>

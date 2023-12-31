@@ -2,10 +2,8 @@ import React, { useEffect, useState } from 'react';
 import styles from './styles/TemperaturaHumedad.module.css'
 import logoTemp from '../../assets/logoTemp.svg'
 import axios from 'axios';
-// import { Mix } from '@ant-design/plots';
-// import { groupBy, get } from '@antv/util';
 import { Line } from '@ant-design/charts';
-// import 'antd/dist/antd.css';
+
 
 
 const TemperaturaHumedadPage = () => {
