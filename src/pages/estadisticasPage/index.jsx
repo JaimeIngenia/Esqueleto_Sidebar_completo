@@ -17,7 +17,7 @@ const EstadisticasPage = () => {
     const mostrarJardines = async () => {
       try {
         const response = await axios.get("https://localhost:7094/api/Jardin/GetAllJardines");
-        console.log(JSON.stringify(response.data, null, 2));
+        // console.log(JSON.stringify(response.data, null, 2));
         setJardines(response.data);
         // console.log(jardines);
       } catch (error) {

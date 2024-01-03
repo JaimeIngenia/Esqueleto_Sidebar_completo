@@ -11,6 +11,8 @@ import axios from 'axios';
 // import { increment } from        "../../storeRedux/slices/counter"
 // import { changeAuthorized } from "../../storeRedux/slices/authorized"
 import md5 from 'md5';
+import plantLogin from '../../assets/plantLogin.svg'
+import { UserOutlined , LockOutlined} from '@ant-design/icons';
 
 
 
@@ -27,8 +29,8 @@ export const Login = (  ) => {
 
     const lightTheme = {
         colorPrimary: 'rgb(58,15,18)',//'#B339ED',//green
-        colorTextBase: 'rgb(58,15,18)',//green
-        colorTextLightSolid: 'white',
+        colorTextBase: 'white',//green
+        colorTextLightSolid: 'black',
     }
     const darkTheme = {
         colorPrimary: '#353434',//black
@@ -50,18 +52,23 @@ export const Login = (  ) => {
     const formItemLayout = {
         labelCol:{
             xs:{
-                span: 12,
+                // span: 12,
+                span: 20,
+
             },
             sm:{
-                span:8,
+                // span:8,
+                span: 20,
             }
         },
         wrappercol:{
             xs:{
-                span:4,
+                // span:4,
+                span: 20,
             },
             sm:{
-                span:20,
+                // span:20,
+                span: 20,
             }
         }
 
@@ -344,131 +351,148 @@ export const Login = (  ) => {
 
 
     <>   
-        <div className={styles.container__padre} >                          
-            <div className={styles.container} >
+        <div className={styles.container__padre} >   
 
-                {
-                    currentTheme === 'light'
-                    ?  <p className={styles.iniciar__sesion} > Iniciar sesion J </p> 
-                    :   <p className={styles.iniciar__sesion__dark} > Iniciar sesion </p> 
-                }
-               
-            </div> 
+            <div className={styles.container__padre__login} >
 
-            <div className={styles.sub_container} >
-                         
-                <ConfigProvider 
-                    className={styles.container}
-                    theme={{
-                    token: currentTheme==='light' ? lightTheme : darkTheme ,
-                    }} >
-            
-                        <Radio.Group
-                            value={currentTheme}
-                            onChange={(e)=>{
-                                setCurrentTheme(e.target.value)
-                            }}
-                        >
+                <div className={styles.container} >
 
-                            <Radio value={"light"} >Light</Radio>
-                            <Radio value={"dark"} >Dark</Radio>
+                    <img src={plantLogin} alt="" />
 
-                        </Radio.Group>
-
-                    <Row>
-                        <Col xs={1} sm={2} md={6} lg={7} >
-                        </Col>
-
-                        <Col xs={22} sm={20} md={12} lg={10} >
-
+                    {/* {
+                        currentTheme === 'light'
+                        ?  <p className={styles.iniciar__sesion} > Iniciar sesion J </p> 
+                        :   <p className={styles.iniciar__sesion__dark} > Iniciar sesion </p> 
+                    } */}
+                    <p>Garden App</p>
                 
-                                    <Form
-                                        {...formItemLayout}
-                                        ref={formRef}
-                                        name="Formulario"
-                                        initialValues={{
-                                            recordar:true
-                                        }}
-                                        onFinish={formSuccess}
-                                        // inFinishFailed={formFailed}
-                                        // onFinish={} 
-                                    >
-                                        
-                                        
-                                        
-                                        
-                                        <Item 
-                                            label="Correo" 
-                                            // name='correo'
-                                            rules={[{
-                                                required:true,
-                                                message: "Por favor ingresa tu correo "
-                                            }]}
-                                            >
-                                                <Input 
+                </div> 
 
-                                                name='correo'
-                                                onChange={handleChange}
-                                                />
+                <div className={styles.sub_container} >
+                            
+                    <ConfigProvider 
+                        className={styles.container__config__provider}
+                        theme={{
+                        token: currentTheme==='light' ? lightTheme : darkTheme ,
+                        }} >
+                
+                            <Radio.Group
+                                value={currentTheme}
+                                onChange={(e)=>{
+                                    setCurrentTheme(e.target.value)
+                                }}
+                            >
 
-                                        </Item>
+                                <Radio value={"light"} >Light</Radio>
+                                <Radio value={"dark"} >Dark</Radio>
 
-                                        <Item 
-                                            label="Contraseña"
-                                            //name="password"
-                                            rules={[{
-                                                required: true,
-                                                message: "Por favor Ingresa tu Contraseña"
-                                            }]} 
-                                            >
-                                                <Password
+                            </Radio.Group>
 
-                                                name='password'
-                                                onChange={handleChange}
-                                                />
+                        <Row>
+                            <Col xs={1} sm={2} md={6} lg={7} >
+                            </Col>
 
-                                        </Item>
+                            <Col xs={22} sm={20} md={12} lg={10} >
 
-
-
-
-
-
-
-                                            <Item onClick={ () =>showModalRegistro() }
-                                                label="Quiere registrarse?" >
-                                             </Item>     
-                                        
-
-
-                                        <Item 
-                                            style={{textAlign: 'center'}}
+                    
+                                        <Form
+                                            {...formItemLayout}
+                                            ref={formRef}
+                                            name="Formulario"
+                                            initialValues={{
+                                                recordar:true
+                                            }}
+                                            onFinish={formSuccess}
+                                            // inFinishFailed={formFailed}
+                                            // onFinish={} 
                                         >
+                                            
+                                            
+                                            
+                                            
+                                            <Item 
+                                                // label="Correo" 
+                                                // name='correo'
+                                                rules={[{
+                                                    required:true,
+                                                    message: "Por favor ingresa tu correo "
+                                                }]}
+                                                >
+                                                    {/* <Input 
 
-                                            <Button type='primary' htmlType='submit' onClick={()=>iniciarSesion()} >Iniciar Sesión</Button>
-                                            {/* <h1> mira el counter:
-                                            {   counterJaime}
+                                                    name='correo'
+                                                    onChange={handleChange}
+                                                    /> */}
+                                                    <Input
+                                                        name='correo'
+                                                        onChange={handleChange} 
+                                                        size="large" 
+                                                        placeholder="large size" 
+                                                        prefix={<UserOutlined />} //LockOutlined
+                                                    />
 
-                                            </h1>   */}
-                                            {/* <Button htmlType='button' onClick={borrarCampos}>Borrar Campos</Button> */}
-                                        </Item>
+                                            </Item>
+
+                                            <Item 
+                                                // label="Contraseña"
+                                                //name="password"
+                                                rules={[{
+                                                    required: true,
+                                                    message: "Por favor Ingresa tu Contraseña"
+                                                }]} 
+                                                >
+                                                    <Password
+
+                                                        name='password'
+                                                        onChange={handleChange}
+                                                        size="large"
+                                                        prefix={<LockOutlined />} 
+                                                    />
+
+                                            </Item>
 
 
 
-                                    </Form>
-                                            {/* <Button onClick={ () => dispatch( increment() )} >Counter</Button>
-
-                                            <Button onClick={ () => dispatch( changeAuthorized() )} >Autorized</Button> */}
-                                            {/* <Button onClick={ () =>  showModal() } >Show Modal</Button> Este sii nooo! */}
 
 
-                        </Col>
-                        <Col xs={1} sm={2} md={6} lg={7} >
-                        </Col>
-                    </Row>
 
-                </ConfigProvider>
+
+                                                <Item onClick={ () =>showModalRegistro() }
+                                                    label="Quiere registrarse?" >
+                                                </Item>     
+                                            
+
+
+                                            <Item 
+                                                style={{textAlign: 'center'}}
+                                            >
+
+                                                <Button type='primary' htmlType='submit' onClick={()=>iniciarSesion()} >Iniciar Sesión</Button>
+                                                {/* <h1> mira el counter:
+                                                {   counterJaime}
+
+                                                </h1>   */}
+                                                {/* <Button htmlType='button' onClick={borrarCampos}>Borrar Campos</Button> */}
+                                            </Item>
+
+
+
+                                        </Form>
+                                                {/* <Button onClick={ () => dispatch( increment() )} >Counter</Button>
+
+                                                <Button onClick={ () => dispatch( changeAuthorized() )} >Autorized</Button> */}
+                                                {/* <Button onClick={ () =>  showModal() } >Show Modal</Button> Este sii nooo! */}
+
+
+                            </Col>
+                            <Col xs={1} sm={2} md={6} lg={7} >
+                            </Col>
+                        </Row>
+
+                    </ConfigProvider>
+                </div>
             </div>
+
         </div> 
         <Modal title="Su registro ha sido exitoso!" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
 

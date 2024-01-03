@@ -37,9 +37,9 @@ const TemperaturaHumedadPage = () => {
           oJardin: sensor.oJardin
         }));
     
-        console.log(JSON.stringify(sensorTemperaturasTransformado, null, 2));
+        // console.log(JSON.stringify(sensorTemperaturasTransformado, null, 2));
         setSensorTemperaturas(sensorTemperaturasTransformado);
-        console.log(sensorTemperaturasTransformado);
+        // console.log(sensorTemperaturasTransformado);
       } catch (error) {
         console.error('Error:', error);
       }

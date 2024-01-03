@@ -15,6 +15,7 @@ import HumedadPage from "./pages/humedadPage/index.jsx";
 import TemperaturaHumedadPage from "./pages/temperaturaHumedadPage";
 import RiegoPage from "./pages/riegoPage/index.jsx";
 import UserPage from "./pages/userPage/index.jsx";
+import LogOutPage from "./pages/logOutPage/index.jsx";
 import { Layout } from "antd";
 import EstadisticasPage from "./pages/estadisticasPage/index.jsx";
 import "bootstrap/dist/css/bootstrap.min.css"
@@ -74,6 +75,8 @@ function App() {
               <Route exact path="/estadisticas" element={<EstadisticasPage />} />
               <Route exact path="/riego" element={<RiegoPage />} />
               <Route exact path="/user" element={<UserPage />} />
+              <Route exact path="/logout" element={<LogOutPage />} />
+
 
             </Route>
           </Routes>
