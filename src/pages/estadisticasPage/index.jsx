@@ -266,6 +266,7 @@ const EstadisticasPage = () => {
       }
     }
 
+
     return (
       <>
 

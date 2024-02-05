@@ -37,6 +37,11 @@ const MenuList = ({ darkTheme }) => {
           color: themeColors.text,
         }}
       >
+        {/* <Menu.Item key="/pokemon" icon={<HomeOutlined />}>
+          <Link to={"/pokemon"}>
+            Pokemon
+          </Link>
+        </Menu.Item> */}
         <Menu.Item key="/" icon={<HomeOutlined />}>
           <Link to={"/"}>
             Home
@@ -76,8 +81,8 @@ const MenuList = ({ darkTheme }) => {
             Usuario
           </Link>
         </Menu.Item>
-
-        {/* <Menu.Item key="/logout" icon={<PoweroffOutlined />}>
+{/* 
+        <Menu.Item key="/logout" icon={<PoweroffOutlined />}>
           <Link to={"/logout"}>
             Logout
           </Link>

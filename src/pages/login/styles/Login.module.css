@@ -20,7 +20,7 @@
 }
 
     .container__padre__login{
-        border: dotted rgba(190, 23, 17, 0.364) 4px;
+        /* border: dotted rgba(190, 23, 17, 0.364) 4px; */
         width: 100%;
         display: flex;
         flex-direction: column;
@@ -37,7 +37,7 @@
                 justify-content: center;
                 align-items: center;
                 width: 90%;
-                border: dotted 3px blue;
+                /* border: dotted 3px blue; */
             }
 
                 .container p{
@@ -66,7 +66,7 @@
                 top: 50%;
                 left: 50%; */
                 /* transform: translate(-50%,-50%); */
-                border: dotted rgb(0, 68, 255) 4px;
+                /* border: dotted rgb(0, 68, 255) 4px; */
                 display: flex;
                 flex-direction: column;
                 justify-content: center;

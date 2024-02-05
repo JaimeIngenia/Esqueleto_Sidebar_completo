@@ -1,7 +1,7 @@
 import React, { createRef, useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import styles from './styles/Login.module.css'
-import { Button, Checkbox, Col, Form, Input, Row ,ConfigProvider, Radio } from 'antd';
+import { Button, Checkbox, Col, Form, Input, Row ,ConfigProvider, Radio, Select } from 'antd';
 import { Modal } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'universal-cookie';
@@ -9,17 +9,131 @@ import axios from 'axios';
 // REDUX
 // import { useSelector, useDispatch } from "react-redux";
 // import { increment } from        "../../storeRedux/slices/counter"
-// import { changeAuthorized } from "../../storeRedux/slices/authorized"
 import md5 from 'md5';
 import plantLogin from '../../assets/plantLogin.svg'
-import { UserOutlined , LockOutlined} from '@ant-design/icons';
-
-
+import { UserOutlined , LockOutlined, MailOutlined} from '@ant-design/icons';
+// redux
+import { increment } from '../../store/slices/counter'
+import styled from 'styled-components';
+import { useDispatch, useSelector } from "react-redux";
+import { changeAuthorized } from '../../store/slices/authorized'
 
 const {Item} = Form;
 const {Password} = Input;
 
+
+const StyledButtonInput = styled(Item)`
+  && {
+    .ant-input-affix-wrapper {
+      border: none !important;
+      background-color: #42635E !important;
+      color: #A3B0A0 !important;
+
+      &:hover,
+      &:focus {
+        border: none !important;
+        box-shadow: none !important;
+        background-color: #42635E !important;
+        outline: none !important; 
+      }
+
+      .ant-input-password-icon {
+        color: #A3B0A0;
+      }
+
+      .ant-input {
+        color: #A3B0A0;
+        background-color: #42635E !important;
+
+        &:focus {
+          outline: none !important; 
+        }
+
+        &:-webkit-autofill {
+          box-shadow: 0 0 0 30px #42635E inset !important;
+          -webkit-text-fill-color: #A3B0A0 !important;
+        }
+
+        &::selection {
+          background-color: #42635E;
+          color: #A3B0A0;
+        }
+
+        &::-moz-selection {
+          background-color: #42635E;
+          color: #A3B0A0;
+        }
+
+        &::placeholder {
+          color: #A3B0A0;
+        }
+
+        &::after {
+          content: '';
+          background-color: #42635E;
+          position: absolute;
+          height: 100%;
+          width: 2px;  /* Ancho del cursor parpadeante */
+          animation: blink-caret 1s infinite;  /* Animación de parpadeo */
+        }
+      }
+    }
+  }
+
+  @keyframes blink-caret {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+`;
+
+
+
+const StyledButtonPassword = styled(Item)`
+  && {
+    .ant-input-affix-wrapper {
+      border: none !important;
+      background-color: #42635E !important;
+      color: #A3B0A0 !important;
+
+      &:hover,
+      &:focus {
+        border: none !important;
+        box-shadow: none !important;
+        background-color: #42635E !important;
+        outline: none !important; 
+      }
+
+      .ant-input-password-icon {
+        color: #A3B0A0;
+      }
+
+      .ant-input {
+        color: #A3B0A0;
+        background-color: #42635E !important;
+        &:focus {
+          outline: none !important; 
+        }
+      }
+    }
+  }
+`;
+
+
+
 export const Login = (  ) => {
+
+    /********************************* */
+    /***********     Redux    ****** */
+    /********************************* */
+
+    const { counterJaime } = useSelector( state => state.counter )
+    const dispatch = useDispatch();
+
+    const { authorizedStateRedux } = useSelector( state => state.authorized )
 
     /********************************* */
     /***********     DarkMode    ****** */
@@ -49,38 +163,38 @@ export const Login = (  ) => {
 
     }
 
-    const formItemLayout = {
-        labelCol:{
-            xs:{
-                // span: 12,
-                span: 20,
+    // const formItemLayout = {
+    //     labelCol:{
+    //         xs:{
+    //             // span: 12,
+    //             span: 20,
 
-            },
-            sm:{
-                // span:8,
-                span: 20,
-            }
-        },
-        wrappercol:{
-            xs:{
-                // span:4,
-                span: 20,
-            },
-            sm:{
-                // span:20,
-                span: 20,
-            }
-        }
+    //         },
+    //         sm:{
+    //             // span:8,
+    //             span: 20,
+    //         }
+    //     },
+    //     wrappercol:{
+    //         xs:{
+    //             // span:4,
+    //             span: 20,
+    //         },
+    //         sm:{
+    //             // span:20,
+    //             span: 20,
+    //         }
+    //     }
 
         
-    }
+    // }
 
 
     /************************************* */
     /***********     Controlador    ****** */
     /************************************* */
 
-    const baseUrl = "https://localhost:7240/api/usuario"
+    const baseUrl = "https://localhost:7094/api/usuario"
 
     const cookies = new Cookies();
 
@@ -109,7 +223,6 @@ export const Login = (  ) => {
             
             if(response.length>0){
                 showModal();
-                //showModal();
                 var respuesta = response[0];
                 console.log("Jaime esta es la respuesta" + respuesta);
                 console.log(respuesta);
@@ -121,7 +234,7 @@ export const Login = (  ) => {
                 cookies.set('apellidos', respuesta.apellidos , { path: '/' });
                 cookies.set('contrasena', respuesta.contrasena , { path: '/' });
                 cookies.set('correo', respuesta.correo , { path: '/' });
-                alert("Bienvenido: " + respuesta.nombres + " " + respuesta.apellidos);
+                // alert("Bienvenido: " + respuesta.nombres + " " + respuesta.apellidos);
                 console.log("Jaime este es el authorizedStateRedux: ");
             }else{
                 alert('El usuario o la contraseña no son correctos')
@@ -154,7 +267,7 @@ export const Login = (  ) => {
         });
         console.log(form);
     }
-
+    
     //-------------------------modal
     const navigate = useNavigate();
 
@@ -168,20 +281,43 @@ export const Login = (  ) => {
     const handleOk = () => {
       setIsModalOpen(false);
       navigate('/');
-    //   dispatch( changeAuthorized() )
+      dispatch( changeAuthorized() )
     };
   
     const handleCancel = () => {
       setIsModalOpen(false);
     };
 
-     //-------------------------modalregistro
+    
+    //******************** */
+    // *** registro
+    //******************** */
+    
+    const [formDataRegistro, setFormDataRegistro] = useState({
+        
+        idTipoDocumento: '',
+        numeroDocumento: '',
+        nombres: '',
+        apellidos: '',
+        correo:'',
+        contrasena:'',
+        idTipoRoles3:'',
+        idTipoRoles3:''
+
+    });
+
+    //-------------------------modalregistro
 
      const [isModalOpenRegistro, setIsModalOpenRegistro] = useState(false);
  
      const showModalRegistro = () => {
         setIsModalOpenRegistro(true);
  
+     };
+
+     const handleCancelRegistro = () => {
+        setIsModalOpenRegistro(false);
+
      };
    
      const handleOkRegistro = () => {
@@ -225,6 +361,12 @@ export const Login = (  ) => {
         var apellidos3 = formValues.apellidos.toString();
         var correo3 = formValues.correo.toString();
         var contrasena3 = md5(formValues.contrasena.toString());
+        var idTipoRoles3 = 1;
+        var idJardin3 = 1;
+        // var idTipoRoles3 =  parseInt(formValues.idTipoRoles.toString());
+        // var idTipoRoles3 =  parseInt(formValues.idTipoDocumento.toString());
+
+
         // console.log("Tipo de IdTipoDocumento:", typeof idTipoDocumento);
         // console.log("Tipo de NumeroDocumento:", typeof numeroDocumento);
         // console.log("Tipo de Nombres:", typeof nombres);
@@ -242,7 +384,7 @@ export const Login = (  ) => {
         `);
 
         try {
-            const response = await fetch("api/usuario/GuardarUsuario", {
+            const response = await fetch("https://localhost:7094/api/usuario/GuardarUsuario", {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json;charset=utf-8'
@@ -255,7 +397,8 @@ export const Login = (  ) => {
                     Apellidos: apellidos3,
                     Correo: correo3,
                     Contrasena: contrasena3,
-         
+                    IdTipoRoles: idTipoRoles3,
+                    idJardin: idJardin3,
                 })
             });
     
@@ -274,23 +417,11 @@ export const Login = (  ) => {
         }
     }
    
-     const handleCancelRegistro = () => {
-        setIsModalOpenRegistro(false);
 
-     };
 
 
     
-     const [formDataRegistro, setFormDataRegistro] = useState({
-        idTipoDocumento: '',
-        numeroDocumento: '',
-        nombres: '',
-        apellidos: '',
-        correo:'',
-        contrasena:'',
-
-    });
-
+   
     const handleChangeRegistro = (e) => {
         const { name, value } = e.target;
         setFormDataRegistro((prevData) => ({
@@ -371,32 +502,17 @@ export const Login = (  ) => {
                 <div className={styles.sub_container} >
                             
                     <ConfigProvider 
-                        className={styles.container__config__provider}
                         theme={{
-                        token: currentTheme==='light' ? lightTheme : darkTheme ,
+                            token: {
+                                colorPrimary: '#42635E',
+                                colorTextBase: '#A3B0A0',
+                                colorTextLightSolid: 'white'
+                              }
                         }} >
                 
-                            <Radio.Group
-                                value={currentTheme}
-                                onChange={(e)=>{
-                                    setCurrentTheme(e.target.value)
-                                }}
-                            >
 
-                                <Radio value={"light"} >Light</Radio>
-                                <Radio value={"dark"} >Dark</Radio>
-
-                            </Radio.Group>
-
-                        <Row>
-                            <Col xs={1} sm={2} md={6} lg={7} >
-                            </Col>
-
-                            <Col xs={22} sm={20} md={12} lg={10} >
-
-                    
                                         <Form
-                                            {...formItemLayout}
+                                            // {...formItemLayout}
                                             ref={formRef}
                                             name="Formulario"
                                             initialValues={{
@@ -407,35 +523,27 @@ export const Login = (  ) => {
                                             // onFinish={} 
                                         >
                                             
-                                            
-                                            
-                                            
-                                            <Item 
-                                                // label="Correo" 
-                                                // name='correo'
+ 
+                                            <StyledButtonInput                               
                                                 rules={[{
                                                     required:true,
                                                     message: "Por favor ingresa tu correo "
                                                 }]}
-                                                >
-                                                    {/* <Input 
-
-                                                    name='correo'
-                                                    onChange={handleChange}
-                                                    /> */}
+                                                >              
                                                     <Input
+
+                                                    // autoComplete="off"
+                                                    style={{ backgroundColor: '#42635E', color: '#A3B0A0' }}
                                                         name='correo'
                                                         onChange={handleChange} 
                                                         size="large" 
-                                                        placeholder="large size" 
-                                                        prefix={<UserOutlined />} //LockOutlined
+                                                        placeholder="Correo electrónico" 
+                                                        prefix={<MailOutlined />} //LockOutlined
                                                     />
 
-                                            </Item>
+                                            </StyledButtonInput>
 
-                                            <Item 
-                                                // label="Contraseña"
-                                                //name="password"
+                                            <StyledButtonPassword 
                                                 rules={[{
                                                     required: true,
                                                     message: "Por favor Ingresa tu Contraseña"
@@ -447,18 +555,18 @@ export const Login = (  ) => {
                                                         onChange={handleChange}
                                                         size="large"
                                                         prefix={<LockOutlined />} 
+                                                        placeholder="Contraseña" 
                                                     />
 
-                                            </Item>
+                                            </StyledButtonPassword>
 
-
-
-
-
-
-
-                                                <Item onClick={ () =>showModalRegistro() }
-                                                    label="Quiere registrarse?" >
+                                                <Item 
+                                                    style={{color: 'white !important'}}
+                                                    onClick={ 
+                                                        () =>showModalRegistro() 
+                                                    }
+                                                    label="Quiere registrarse ?  "    >
+                                                    
                                                 </Item>     
                                             
 
@@ -484,16 +592,17 @@ export const Login = (  ) => {
                                                 {/* <Button onClick={ () =>  showModal() } >Show Modal</Button> Este sii nooo! */}
 
 
-                            </Col>
-                            <Col xs={1} sm={2} md={6} lg={7} >
-                            </Col>
-                        </Row>
+                            
+                           
+                    
 
                     </ConfigProvider>
                 </div>
             </div>
 
         </div> 
+
+
         <Modal title="Su registro ha sido exitoso!" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
 
 
@@ -504,7 +613,7 @@ export const Login = (  ) => {
       </Modal>       
       <Modal title="Reistro!" open={isModalOpenRegistro} onOk={handleOkRegistro} onCancel={handleCancelRegistro}>
             <Form
-                {...formItemLayout}
+                // {...formItemLayout}
                 ref={formRefRegistro}
                 name="FormularioRegistro"
                 onFinish={guardarUsuario}

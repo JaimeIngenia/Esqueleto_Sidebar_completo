@@ -1,20 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const counterSlice = createSlice({
-  name: "counter",
+
+export const authotizedSlice = createSlice({
+  name: "authorized",
   initialState: {
-    counterJaime: 150,
+    authorizedStateRedux: false,
   },
   reducers: {
-    increment: (state) => {
+    changeAuthorized: (state) => {
       // Redux Toolkit allows us to write "mutating" logic in reducers. It
       // doesn't actually mutate the state because it uses the Immer library,
       // which detects changes to a "draft state" and produces a brand new
       // immutable state based off those changes
-      state.counterJaime += 1;
+      // state.authorizedStateRedux = true;
+      state.authorizedStateRedux = !state.authorizedStateRedux;
+
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { increment } = counterSlice.actions;
+export const { changeAuthorized } = authotizedSlice.actions;

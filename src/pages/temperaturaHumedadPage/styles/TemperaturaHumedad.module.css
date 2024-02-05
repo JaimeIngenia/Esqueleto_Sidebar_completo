@@ -45,10 +45,12 @@
         align-items: center;
     }
         .container__icon__data__izq{
-            width: 50%;
+            width: 
+            30%;
             height: 60vh;
             /* border: dotted rgb(165, 165, 8) 3px; */
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
         }
@@ -56,11 +58,8 @@
                 width: 50%;
             }
         .container__icon__data__der{
-            width: 50%;
-            /* height: 60vh; */
-            height: auto;
-            /* border: dotted rgb(165, 29, 8) 3px; */
-            display: flex;
+            width: 70%;
+            color: 'black',
         }
 
         /* .container__icon__data__der Line{
